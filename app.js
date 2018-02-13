@@ -6,8 +6,8 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongo = require('./mongoDb/mongo');
-const pasport =require('./auth/auth');
-const user = require('./api/v0/routers/user');
+const pasport =require('./passport/passport');
+const auth = require('./api/v0/auth/auth');
 const index = require('./api/v0/index');
 const users = require('./api/v0/users');
 var app = express();
@@ -38,8 +38,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/user', user);
-app.use('/', index);
+// app.use('/user', user);
+app.use('/', auth);
 app.use('/users', users);
 
 
