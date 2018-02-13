@@ -1,0 +1,18 @@
+{
+  "Db":{
+    "url": "mongodb://localhost:27017/",
+    "dbName": "CryptoCrunch"
+  },
+  "Auth":{
+    "google":{
+      "clientId":"536019422812-qs4qbsc4n22jgqv2a0h6l087pcm94354.apps.googleusercontent.com",
+      "clientSecret":"gCklybMkLyIQaPA0KkOJy3fm",
+      "callbackURL":"http://localhost:3000/auth/google/callback"
+    },
+    "facebook" : {
+      "clientId": "186584431940956",
+      "clientSecret": "8370e93b6d44cc63b6af8dbc00162642",
+     "callbackURL": "http://localhost:3000/auth/facebook/callback"
+    }
+  }
+  }
