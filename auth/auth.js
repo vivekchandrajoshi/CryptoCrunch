@@ -7,7 +7,7 @@ googleObj['clientID'] = config.get('Auth.google.client_id');
 googleObj['clientSecret'] = config.get('Auth.google.client_secret');
 passport.use(
     new GoogleStategy(googleObj,function (accessToken, refreshToken, profile, done)  {
-     console.log("profile");
+     console.log("accessToken", accessToken,"refreshToken", refreshToken, "profile", profile, "done",  done);
     })
 
 )
