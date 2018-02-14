@@ -1,0 +1,15 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": "standard",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-var": "error",
+    "prefer-let": "error",
+    "prefer-const": "error"
+  }
+}
