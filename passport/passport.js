@@ -2,7 +2,19 @@ const passport = require('passport');
 const GoogleStategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const config = require('config');
-const googleObj = new Object()
+const googleObj = new Object();
+const jwt = require('jsonwebtoken');
+
+function generateToken(user) {
+	let payload = {
+		iss: 'my.domain.com',
+		sub: user._id,
+		iat: moment().unix(),
+		exp: Math.floor(Date.now() / 1000) + (60 * 60)    // token with 1 hour of expiration
+	};
+	return jwt.sign(payload, config.get('TOKEN_SECRET'));
+}
+
 googleObj['callbackURL'] = config.get('Auth.google.callbackURL');
 googleObj['clientID'] = config.get('Auth.google.clientId');
 googleObj['clientSecret'] = config.get('Auth.google.clientSecret');

@@ -10,6 +10,7 @@ const pasport =require('./passport/passport');
 const auth = require('./api/v0/auth/auth');
 const index = require('./api/v0/index');
 const users = require('./api/v0/users');
+const jwt = require('jsonwebtoken');
 var app = express();
 
 const corsOptions = {
@@ -22,7 +23,7 @@ const corsOptions = {
 }
 
 app.use(cors(corsOptions));
-mongo.connect(function (data) {})
+// mongo.connect(function (data) {})
 
 
 
