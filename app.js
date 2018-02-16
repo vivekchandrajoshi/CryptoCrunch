@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-const cors = require('cors')
+const cors = require('cors');
+
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongo = require('./mongoDb/mongo');
@@ -10,6 +11,7 @@ const pasport =require('./passport/passport');
 const auth = require('./api/v0/auth/auth');
 const index = require('./api/v0/index');
 const users = require('./api/v0/users');
+const convert = require('./util/xmlReader');
 var app = express();
 
 const corsOptions = {
@@ -23,7 +25,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 mongo.connect(function (data) {})
-
+convert.getXML('https://www.coindesk.com/feed/', function(data){
+    console.log(JSON.stringify(data));
+    });
 
 
 // view engine setup
