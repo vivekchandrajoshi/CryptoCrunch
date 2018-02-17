@@ -16,6 +16,11 @@
     },
     "jwt": {
       "tokenSecret" : "5451e26d3d08395fa2e65e10704618bc7f50654253d514ed342e1732c73d7661"
+    },
+    "oneSignal" : {
+      "appAuthKey": "ZmE2MDliMjUtMzAwZi00ZTE5LThhY2QtNjhkMDhlMTkxZmJl",
+      "appId": "aeaff00d-1f16-4372-a476-7b2d035813e3",
+      "userAuthKey":"OWVhYjk5MDQtMDhjOC00NzlhLWJlMjEtNjdlZmI4MDAwZmZk"
     }
   }
   }

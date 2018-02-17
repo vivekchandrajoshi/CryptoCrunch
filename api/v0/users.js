@@ -9,7 +9,4 @@ router.get('/', auth.isAuth, function(req, res, next) {
   res.send('respond with a resource <a href="/user/login">login</a>');
 });
 
-
- 
-
 module.exports = router;

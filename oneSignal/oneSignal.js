@@ -1,0 +1,1 @@
+const OneSignal = require('onesignal-node');

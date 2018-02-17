@@ -1,14 +1,26 @@
-const passport = require('passport');
-const GoogleStategy = require('passport-google-oauth20');
 const config = require('config');
-const googleObj = new Object()
-googleObj['callbackURL'] = config.get('Auth.google.redirect_uris');
-googleObj['clientID'] = config.get('Auth.google.client_id');
-googleObj['clientSecret'] = config.get('Auth.google.client_secret');
-passport.use(
-    new GoogleStategy(googleObj,function (accessToken, refreshToken, profile, done)  {
-     console.log("accessToken", accessToken,"refreshToken", refreshToken, "profile", profile, "done",  done);
-    })
 
-)
+function isAuth (req, res, next) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        console.log("token");
+        jwt.verify(token, config.get('Auth.jwt.tokenSecret'), function(err, decoded) {
+            if (err) {
+                console.log("err",err);
+                return res.json({ success: false, message: 'Failed to authenticate token.' });
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
 
+    } else {
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+
+    }
+};
+
+module.exports = {isAuth};

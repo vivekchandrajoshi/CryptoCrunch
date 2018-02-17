@@ -26,7 +26,7 @@ function find(collectionName, query, callback ) {
         const collection = db.collection(collectionName);
         collection.find(query).toArray(function (err,data) {
             console.log(data, "find-data");
-            callback(data);
+           callback(err,data);
         })
 }
 
@@ -34,7 +34,7 @@ function findAndDelete(collectionName, query, callback) {
     const collection = db.collection(collectionName);
     collection.findAndDelete(query , function(err,data) {
         console.log(data, "findAndDelete-data");
-        callback(data);
+       callback(err,data);
     })
 
 }
@@ -54,15 +54,15 @@ function insertOne(collectionName, data, callback) {
 function insertMany(collectionName, data, callback) {
     const collection = db.collection(collectionName);
     collection.insertMany(data, function (err, data) {
-        console.log(data, "insertMany-data");
-        callback(data);
+        console.log(data,err, "insertMany-data");
+       callback(err,data);
     })
 }
 function updateOne(collectionName,toUpdate, data, callback) {
     const collection = db.collection(collectionName);
     collection.updateOne(toUpdate, {$set: data}, function (err, data) {
         console.log(data, "updateOne-data");
-        callback(data);
+       callback(err,data);
     })
 }
 
@@ -70,7 +70,7 @@ function updateMany(collectionName,toUpdate, data, callback) {
     const collection = db.collection(collectionName);
     collection.updateMany(toUpdate, {$set: data}, function (err, data) {
         console.log(data, "updateMany-data");
-        callback(data);
+        callback(err,data);
     })
 }
 

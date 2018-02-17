@@ -18,12 +18,14 @@ passport.use( new googleStategy(googleObj,function (accessToken, refreshToken, p
      var userDetails = {
         'displayname' : profile['displayName']
      };
-     mongo.insertOne('user', userDetails, function(data){
+     mongo.insertOne('user', userDetails, function(err,data){
+         if(!err){
          var userData = {
              'user' : data.ops,
              'token' : generateToken(data)
          }
          console.log(userData,"****data");
+         }
      });
     }))
 

@@ -38,20 +38,20 @@ function response(data,err, callback) {
 //     intrestTest: []
 // }
 
-// var dateTime = {
-//     updatedBy :"",
-//     updatedOn : "",
-//     createdBy :"",
-//     createdOn :"",
-//     deletedOn : "",
-//     deletedBy :"",
-// }
+var dateTime = {
+    updatedBy :"",
+    updatedOn : "",
+    createdBy :"",
+    createdOn :"",
+    deletedOn : "",
+    deletedBy :"",
+}
 
 
-function setDate(obj, src,mode, userName) {
-    for (var key in src) {
-        if (src.hasOwnProperty(key) && key.indexOf(mode)===0){
-            if(key === mode + "By" ){
+function setData(obj,mode, userName) {
+    for (var key in dateTime) {
+        if (dateTime.hasOwnProperty(key) && key.indexOf(mode)===0){
+            if(key === mode + "dBy" ){
                 obj[key] =userName;
             }else{
                 obj[key] = new Date();
@@ -70,10 +70,13 @@ function setDate(obj, src,mode, userName) {
 // check validation on schema
 
 // validateModel(user, data);
-var newArray = [];
 
-function validateModel(schemaName, schemaData) {
-    console.log("schemaname", schemaName, "schemadata",  schemaData);
+
+function validateModel(schemaName, schemaData, isRecursion ) {
+    if(! isRecursion){
+        var newArray = [];
+    }
+    if(Object.keys(schemaData).length>0){
     for (value in schemaName) {
         const returnData  =  checkRequired(schemaName[value], value, schemaData[value]);
         if(returnData){
@@ -81,7 +84,9 @@ function validateModel(schemaName, schemaData) {
              newArray.push(returnData);
         }
     }
-    return newArray;
+    return newArray;} else{
+        return  newArray.push('no data found');
+    }
 }
 
 // check type is matched or not
@@ -91,7 +96,7 @@ function checkType(schemaData, key, value ,type) {
         return ValidateData(schemaData, key, value)       ;
     } else if(type === 'object'){
         for (schema in value) {
-            validateModel( this[schemaData['name']],value[schema]);
+            validateModel( this[schemaData['name']],value[schema], true);
         }
     } else {
         return key + ' is not a ' + schemaData['type'] ;
@@ -139,4 +144,4 @@ function ValidateData(schemaData, key , value){
     }
 }
 
-module.exports = {response, validateModel};
+module.exports = {setData, validateModel};

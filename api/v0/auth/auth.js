@@ -39,13 +39,18 @@ router.get('/auth/facebook/callback',
     });
 
     router.post('/auth/register', function(req, res, next) {
-        console.log(req,"***************",req.body)
-        var valid =util.validateModel(user,req.body);
-        if(valid){
+        var valid =util.validateModel(user.user,req.body);
+        if(valid.length>0){
             res.send(valid);
-        }else {
-            mongo.insertMany('user',req.body, function(data){
+        }else {0
+            console.log("test data", util.setData(req.body,'create',null));
+            mongo.insertOne('user',util.setData(req.body,'create',null), function(err,data){
+                if(!err){
                 res.send(data);
+                }
+                else{
+                    res.send(err);
+                }
             })
         }
         

@@ -4,10 +4,6 @@ const parser = new Parser();
 function getXML(url, callback) {
     parser.parseURL(url, function(err, feed) {
         callback(feed)
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/CC-003
     })
 }
 
