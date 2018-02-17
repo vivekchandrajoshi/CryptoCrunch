@@ -1,9 +1,11 @@
 function response(data,err, callback) {
     var resObj = new Object();
     if(err){
+        resObj['status'] = 500;
         resObj['success'] = false;
         resObj['error'] = err.message;
     } else{
+        resObj['status'] = 200;
         resObj['success'] = true;
         resObj['data'] = data;
     }
@@ -12,38 +14,38 @@ function response(data,err, callback) {
 
 //JavaScript-C24.2.0 (SpiderMonkey)
 
-var user = {
-    name: { type: "string", required: true, min:3,max:5 },
-    age: { type: "string", required: true, match : '/2/g' },
-    gender: { type: "string", enum: ['Critical', 'High', 'Medium', 'Low'] },
-    intrest: {type: "schema", name: 'intrest', required: true },
-    intrestTest: {type: "array", required: true },
-    array: []
-}
+// var user = {
+//     name: { type: "string", required: true, min:3,max:5 },
+//     age: { type: "string", required: true, match : '/2/g' },
+//     gender: { type: "string", enum: ['Critical', 'High', 'Medium', 'Low'] },
+//     intrest: {type: "schema", name: 'intrest', required: true },
+//     intrestTest: {type: "array", required: true },
+//     array: []
+// }
 
 
-var intrest = {
-    name: { type: "string", required: true },
-    age: { type: "number", required: true }
-}
+// var intrest = {
+//     name: { type: "string", required: true },
+//     age: { type: "number", required: true }
+// }
 
-var data = {
-    name: "jdqqwaadada",
-    age: '25',
-    gender: "Male",
-    intrest:[{name :"abc", age:25}],
-    array: [0],
-    intrestTest: []
-}
+// var data = {
+//     name: "jdqqwaadada",
+//     age: '25',
+//     gender: "Male",
+//     intrest:[{name :"abc", age:25}],
+//     array: [0],
+//     intrestTest: []
+// }
 
-var dateTime = {
-    updatedBy :"",
-    updatedOn : "",
-    createdBy :"",
-    createdOn :"",
-    deletedOn : "",
-    deletedBy :"",
-}
+// var dateTime = {
+//     updatedBy :"",
+//     updatedOn : "",
+//     createdBy :"",
+//     createdOn :"",
+//     deletedOn : "",
+//     deletedBy :"",
+// }
 
 
 function setDate(obj, src,mode, userName) {
@@ -68,14 +70,18 @@ function setDate(obj, src,mode, userName) {
 // check validation on schema
 
 // validateModel(user, data);
+var newArray = [];
 
 function validateModel(schemaName, schemaData) {
+    console.log("schemaname", schemaName, "schemadata",  schemaData);
     for (value in schemaName) {
         const returnData  =  checkRequired(schemaName[value], value, schemaData[value]);
         if(returnData){
-            print(returnData);
+            // console.log(returnData);
+             newArray.push(returnData);
         }
     }
+    return newArray;
 }
 
 // check type is matched or not

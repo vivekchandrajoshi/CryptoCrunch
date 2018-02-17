@@ -42,8 +42,12 @@ function findAndDelete(collectionName, query, callback) {
 function insertOne(collectionName, data, callback) {
     const collection = db.collection(collectionName);
     collection.insertOne(data , function(err,data) {
-        console.log(data, "inserted-data");
-        callback(data);
+        const obj = new Object();
+        obj['result']= data.result,  
+        obj['ops'] = data.ops;
+        obj['insertedCount'] = data.insertedCount,
+        obj['insertedId'] = data.insertedId,
+        callback(obj);
     })
 }
 

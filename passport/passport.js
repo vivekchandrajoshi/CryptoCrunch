@@ -1,7 +1,9 @@
 const passport = require('passport');
-const GoogleStategy = require('passport-google-oauth20');
-const FacebookStrategy = require('passport-facebook').Strategy;
+const googleStategy = require('passport-google-oauth20');
+const facebookStrategy = require('passport-facebook').Strategy;
 const config = require('config');
+const jwt = require('jsonwebtoken');
+const mongo = require('../mongoDb/mongo');
 const googleObj = new Object()
 googleObj['callbackURL'] = config.get('Auth.google.callbackURL');
 googleObj['clientID'] = config.get('Auth.google.clientId');
@@ -11,13 +13,31 @@ facebookObj['callbackURL'] = config.get('Auth.facebook.callbackURL');
 facebookObj['clientID'] = config.get('Auth.facebook.clientId');
 facebookObj['clientSecret'] = config.get('Auth.facebook.clientSecret');
 
-passport.use( new GoogleStategy(googleObj,function (accessToken, refreshToken, profile, done)  {
-     console.log("accessToken", accessToken,"refreshToken", refreshToken, "profile", profile, "done",  done);
+passport.use( new googleStategy(googleObj,function (accessToken, refreshToken, profile, done)  {
+    //  console.log("accessToken", accessToken,"refreshToken", refreshToken, "profile", profile, "done",  done);
+     var userDetails = {
+        'displayname' : profile['displayName']
+     };
+     mongo.insertOne('user', userDetails, function(data){
+         var userData = {
+             'user' : data.ops,
+             'token' : generateToken(data)
+         }
+         console.log(userData,"****data");
+     });
     }))
 
-passport.use( new FacebookStrategy(facebookObj,
+passport.use( new facebookStrategy(facebookObj,
     function(accessToken, refreshToken, profile, done) {
         console.log("accessToken", accessToken,"refreshToken", refreshToken, "profile", profile, "done",  done);
 
     }
 ));
+
+function generateToken(user) {
+	let payload = {
+		sub: user.insertedIcled,
+		exp: Math.floor(Date.now() / 1000) + (60 * 60)    // token with 1 hour of expiration
+	};
+	return jwt.sign(payload, config.get('Auth.jwt.tokenSecret'));
+}

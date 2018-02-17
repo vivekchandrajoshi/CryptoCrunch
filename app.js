@@ -13,6 +13,7 @@ const index = require('./api/v0/index');
 const users = require('./api/v0/users');
 const convert = require('./util/xmlReader');
 var app = express();
+// var userController = require('./api/v0.users');
 
 const corsOptions = {
     'origin': '*',
@@ -26,7 +27,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 mongo.connect(function (data) {})
 convert.getXML('https://www.coindesk.com/feed/', function(data){
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
     });
 
 
@@ -42,9 +43,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // app.use('/user', user);
 app.use('/', auth);
-app.use('/users', users);
+app.use('/users',  users);
 
 
 // catch 404 and forward to error handler
@@ -65,5 +67,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;
