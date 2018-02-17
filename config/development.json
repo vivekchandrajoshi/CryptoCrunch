@@ -14,6 +14,13 @@
       "clientSecret": "8370e93b6d44cc63b6af8dbc00162642",
      "callbackURL": "http://localhost:3000/auth/facebook/callback"
     },
+<<<<<<< Updated upstream
     "TOKEN_SECRET" : "5451e26d3d08395fa2e65e10704618bc7f50654253d514ed342e1732c73d7661"
+=======
+    "jwt": {
+      "tokenSecret" : "5451e26d3d08395fa2e65e10704618bc7f50654253d514ed342e1732c73d7661",
+      "secret": "supersecret"
+    }
+>>>>>>> Stashed changes
   }
   }

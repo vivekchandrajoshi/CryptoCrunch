@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var util = require('../../../util/util');
+var user = require('../schema/user');
+var mongo = require ('../../../mongoDb/mongo');
+
 router.get('/auth/google',
     passport.authenticate('google', { scope: ['profile'] }), function(req, res, next) {
         passport.use(new BearerStrategy(
@@ -34,4 +38,17 @@ router.get('/auth/facebook/callback',
         res.send('logout');
     });
 
+    router.post('/auth/register', function(req, res, next) {
+        console.log(req,"***************",req.body)
+        var valid =util.validateModel(user,req.body);
+        if(valid){
+            res.send(valid);
+        }else {
+            mongo.insertMany('user',req.body, function(data){
+                res.send(data);
+            })
+        }
+        
+       
+    });
 module.exports = router;
