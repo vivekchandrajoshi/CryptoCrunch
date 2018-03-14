@@ -42,7 +42,7 @@ router.get('/auth/facebook/callback',
         var valid =util.validateModel(user.user,req.body);
         if(valid.length>0){
             res.send(valid);
-        }else {0
+        }else {
             console.log("test data", util.setData(req.body,'create',null));
             mongo.insertOne('user',util.setData(req.body,'create',null), function(err,data){
                 if(!err){

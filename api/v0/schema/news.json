@@ -1,0 +1,30 @@
+{
+    "news": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "description": {
+            "type": "string",
+            "required": true
+        },
+        "image": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string",
+            "required": true
+        },
+        "publishedTime": {
+            "type": "string",
+            "required": true
+        },
+        "isPublished": {
+            "type": "boolean"
+        },
+        "newsData": {
+            "type": "string"
+        }
+    }
+}
+

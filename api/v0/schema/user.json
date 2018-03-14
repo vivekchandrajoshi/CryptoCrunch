@@ -8,12 +8,9 @@
             "type": "string",
             "required": true
         },
-        "name": {
+        "password": {
             "type": "string",
             "required": true
-        },
-        "image": {
-            "type": "string"
         }
     }
 }

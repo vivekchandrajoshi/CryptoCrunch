@@ -21,11 +21,10 @@ function connect (callback) {
         // });
     });
 }
-function find(collectionName, query, callback ) {
 
+function find(collectionName, query, callback ) {
         const collection = db.collection(collectionName);
         collection.find(query).toArray(function (err,data) {
-            console.log(data, "find-data");
            callback(err,data);
         })
 }
@@ -42,12 +41,15 @@ function findAndDelete(collectionName, query, callback) {
 function insertOne(collectionName, data, callback) {
     const collection = db.collection(collectionName);
     collection.insertOne(data , function(err,data) {
+
         const obj = new Object();
+        if(!err){
         obj['result']= data.result,  
         obj['ops'] = data.ops;
         obj['insertedCount'] = data.insertedCount,
-        obj['insertedId'] = data.insertedId,
-        callback(obj);
+        obj['insertedId'] = data.insertedId
+        }
+        callback(err,obj);
     })
 }
 
@@ -61,8 +63,8 @@ function insertMany(collectionName, data, callback) {
 function updateOne(collectionName,toUpdate, data, callback) {
     const collection = db.collection(collectionName);
     collection.updateOne(toUpdate, {$set: data}, function (err, data) {
-        console.log(data, "updateOne-data");
-       callback(err,data);
+        //console.log(data, "updateOne-data");
+       callback(err,data.result);
     })
 }
 

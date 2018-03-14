@@ -16,15 +16,17 @@ facebookObj['clientSecret'] = config.get('Auth.facebook.clientSecret');
 passport.use( new googleStategy(googleObj,function (accessToken, refreshToken, profile, done)  {
     //  console.log("accessToken", accessToken,"refreshToken", refreshToken, "profile", profile, "done",  done);
      var userDetails = {
-        'displayname' : profile['displayName']
+        'displayname' : profile['displayName'],
+         'token' : generateToken(profile['displayName'])
      };
+    console.log(userDetails,"****data");
      mongo.insertOne('user', userDetails, function(err,data){
          if(!err){
          var userData = {
              'user' : data.ops,
-             'token' : generateToken(data)
+             'token' : generateToken(data.ops)
          }
-         console.log(userData,"****data");
+
          }
      });
     }))
@@ -38,7 +40,7 @@ passport.use( new facebookStrategy(facebookObj,
 
 function generateToken(user) {
 	let payload = {
-		sub: user.insertedIcled,
+		sub: user,
 		exp: Math.floor(Date.now() / 1000) + (60 * 60)    // token with 1 hour of expiration
 	};
 	return jwt.sign(payload, config.get('Auth.jwt.tokenSecret'));

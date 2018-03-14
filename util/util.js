@@ -77,15 +77,15 @@ function validateModel(schemaName, schemaData, isRecursion ) {
         var newArray = [];
     }
     if(Object.keys(schemaData).length>0){
-    for (value in schemaName) {
-        const returnData  =  checkRequired(schemaName[value], value, schemaData[value]);
-        if(returnData){
-            // console.log(returnData);
-             newArray.push(returnData);
+        for (value in schemaName) {
+            const returnData  =  checkRequired(schemaName[value], value, schemaData[value]);
+            if(returnData){
+                newArray.push(returnData);
+            }
         }
-    }
-    return newArray;} else{
-        return  newArray.push('no data found');
+        return newArray;} else{
+         newArray.push('no data found');
+         return newArray;
     }
 }
 
@@ -144,4 +144,10 @@ function ValidateData(schemaData, key , value){
     }
 }
 
-module.exports = {setData, validateModel};
+
+function encript(data, callback){
+    data
+    callback(data)
+}
+
+module.exports = {setData, validateModel, encript };

@@ -1,4 +1,6 @@
 const config = require('config');
+var jwt = require('jsonwebtoken');
+
 
 function isAuth (req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -9,6 +11,7 @@ function isAuth (req, res, next) {
                 console.log("err",err);
                 return res.json({ success: false, message: 'Failed to authenticate token.' });
             } else {
+                console.log("decoded", decoded);
                 req.decoded = decoded;
                 next();
             }
