@@ -1,6 +1,5 @@
 angular.module('CryptoCrunch', ['ngRoute', 'CryptoCrunch.Service','CryptoCrunch.SignupController','CryptoCrunch.signController','CryptoCrunch.mainController','CryptoCrunch.Service'])
 .config(function ($routeProvider, $httpProvider) {
-
     $routeProvider.when('/', {
         templateUrl: 'views/home.html',
         controller: 'MainController'
