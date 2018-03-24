@@ -17,14 +17,14 @@ angular.module('CryptoCrunch.Service', [])
         },
         getFeeds: function() {
             var deferred = $q.defer();
-            deferred.resolve($http.get('http://localhost:3000/feed/getFeedList/'));
+            deferred.resolve($http.get('http://localhost:3000/feed/getFeedList?skip=0&limit=10&sort=-1'));
             return deferred.promise;
 
         },
 
         getFeedsByUrl:function (url) {
             var deferred = $q.defer();
-            deferred.resolve($http.get('http://localhost:3000/feed/getFeedsByUrl?url='+ url));
+            deferred.resolve($http.get('http://localhost:3000/feed?skip=0&limit=10&sort=-1'));
             return deferred.promise;
         },
 

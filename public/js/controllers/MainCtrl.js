@@ -23,7 +23,7 @@ angular.module('CryptoCrunch.mainController', [])
     	main.getFeedsByUrl(value).then( function (feedData) {
     		$scope.isFeedUrl=false;
     		$scope.isFeedDetails= true;
-			$scope.feedNews = feedData.data[0].feedData;
+			$scope.feedNews = feedData.data;
 		})
 		}
 		$scope.getNewsData=function (value) {

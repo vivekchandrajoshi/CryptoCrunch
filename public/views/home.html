@@ -4,15 +4,6 @@
 			<div class="logo-link sidebar" >
 				<img src="https://static.cryptopanic.com/static/img/cryptopanic-logo-vert-dark.514a405381d8.svg" alt class = "normal-logo">
 			</div>
-			<div class="logo-link sidebar" >
-				<img src="https://static.cryptopanic.com/static/img/cryptopanic-logo-vert-dark.514a405381d8.svg" alt class = "normal-logo">
-			</div>
-			<div class="logo-link sidebar" >
-				<img src="https://static.cryptopanic.com/static/img/cryptopanic-logo-vert-dark.514a405381d8.svg" alt class = "normal-logo">
-			</div>
-			<div class="logo-link sidebar" >
-				<img src="https://static.cryptopanic.com/static/img/cryptopanic-logo-vert-dark.514a405381d8.svg" alt class = "normal-logo">
-			</div>
 		</div>
 		<div class="col-sm-5 nopadding" >
 			<div class="header " >
@@ -35,12 +26,12 @@
 
 			<div class="sidebar" >
 				<div ng-repeat="(key, value) in feedsUrl" ng-if = "isFeedUrl">
-					<p class="sidebar"><a href="javascript:void(0)" ng-click="getFeed(value)" style="text-decoration: none;color: #fff;">{{value}}</a>
+					<p ><a href="javascript:void(0)" ng-click="getFeed(value)" style="text-decoration: none;color: #fff;">{{value}}</a>
 						<button class="btn btn-primary" ng-click= "editFeedSource(value)">edit</button></p>
 </div>
 				<div ng-repeat="(key, value) in feedNews" ng-if="isFeedDetails">
 					<p class="sidebar"><a href="javascript:void(0)" ng-click="getNewsData(feedNews[key])" style="text-decoration: none;color: #fff;">{{value.title}}</a></p>
-					<p>{{value.url}}</p>
+					<a href="{{value.DataUrl}}">{{value.SourceName}}</a> {{value.SourceName}} -- {{key}}
 				</div>
 
 			</div>

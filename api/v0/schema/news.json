@@ -24,6 +24,14 @@
         },
         "newsData": {
             "type": "string"
+        },
+        "DataUrl": {
+            "type": "string",
+            "required": true
+        },
+        "SourceName": {
+            "type": "string",
+            "required": true
         }
     }
 }

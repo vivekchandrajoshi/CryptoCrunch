@@ -22,17 +22,47 @@ function connect (callback) {
     });
 }
 
-function find(collectionName, query, callback ) {
+function find(collectionName, query,callback) {
+  // const projection = options ? options : {}
         const collection = db.collection(collectionName);
         collection.find(query).toArray(function (err,data) {
            callback(err,data);
         })
 }
+function search(collectionName,query,filter,project,skip,limit,sort, callback) {
+    var mongoQuery = {}
+    var mongoFilter = {}
+    var mongoProject ={}
+    var mongoSkip=0;
+    var mongoLimit=30;
+    var mongoSort = {};
+    if(query){
+        mongoQuery = query
+    }
+    if(filter){
+        mongoFilter = filter
+    }
+    if(project){
+        mongoProject = project
+    }
+    if(skip){
+        mongoSkip = parseInt(skip)
+    }
+    if(limit){
+        mongoLimit = parseInt(limit)
+    }
+    if(sort){
+        mongoSort = sort
+    }
+    const collection = db.collection(collectionName);
+    collection.find(mongoQuery).filter(mongoFilter).project(mongoProject).sort(mongoSort).skip(mongoSkip).limit(10).toArray(function (err,data) {
+        callback(err,data);
+    })
+}
 
 function findAndDelete(collectionName, query, callback) {
     const collection = db.collection(collectionName);
     collection.findAndDelete(query , function(err,data) {
-        console.log(data, "findAndDelete-data");
        callback(err,data);
     })
 
@@ -78,5 +108,5 @@ function updateMany(collectionName,toUpdate, data, callback) {
 
 
 
-module.exports = {find,findAndDelete,insertOne,insertMany,updateOne,updateMany,connect}
+module.exports = {find,findAndDelete,insertOne,insertMany,updateOne,updateMany,connect,search}
 
