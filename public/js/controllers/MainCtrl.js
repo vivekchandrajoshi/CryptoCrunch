@@ -1,10 +1,10 @@
 angular.module('CryptoCrunch.mainController', [])
-	.controller('MainController', function($scope, main) {
+	.controller('MainController', function($scope,$location, main) {
 
 	$scope.tagline = 'To the moon and back!';
 	$scope.isFeedUrl = false;
 	$scope.isFeedDetails = false;
-
+    $scope.isCreateNews=false;
 	$scope.getUrl = function () {
         main.getFeeds().then(function (feeds) {
             $scope.isFeedUrl = true;
@@ -27,7 +27,7 @@ angular.module('CryptoCrunch.mainController', [])
 		})
 		}
 		$scope.getNewsData=function (value) {
-            main.getNewsData(value.link).then( function (feedNews) {
+            main.getNewsData(value._id).then( function (feedNews) {
               $scope.news = feedNews.data[0];
 
             })
@@ -61,5 +61,14 @@ angular.module('CryptoCrunch.mainController', [])
         $scope.cancel = function(value){
             $scope.isEditFeedSource =false;
 
+        }
+        $scope.CreateNews = function (id) {
+            $scope.isFeedUrl = false;
+            $scope.isFeedDetails = false;
+            $scope.isCreateNews=true;
+            main.getNewsData(id).then( function (feedNews) {
+                $scope.news = feedNews.data[0];
+
+            })
         }
 });

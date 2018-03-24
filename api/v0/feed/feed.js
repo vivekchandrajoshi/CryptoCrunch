@@ -6,7 +6,7 @@ var util = require('../../../util/util');
 var feed = require('../schema/feed');
 var news = require('../schema/news');
 var metaget = require("metaget");
-
+var ObjectId = require('mongodb').ObjectID;
 
 
 
@@ -21,6 +21,20 @@ router.get('/', function (req, res, next) {
         }
     })
 })
+
+
+router.get('/getFeedDescription/:id', function (req, res, next) {
+    console.log("req.params.id",req.params.id);
+    mongo.find('feedData',{"_id": new ObjectId(req.params.id)}, function (err, data) {
+        if(!err){
+            res.send(data);
+        }
+        else{
+            res.send(err);
+        }
+    })
+})
+
 // router.get('/', function (req, res, next) {
 //     xmlTojson.getFeed(req.query.url,function(err, data){
 //       setXmlData(data.items);
@@ -128,15 +142,7 @@ router.get('/getFeedList', function (req, res, next) {
 
 
 
-router.get('/getFeedDescription', function(req,res,next) {
-    getMetaData(req.query.url, function (metaData) {
-        getNewsData(metaData["ia:markup_url"],metaData,function (data) {
-            saveNewsData(data,function (newesData) {
-                res.send(newesData);
-            });
-        })
-    })
-});
+
 
 function getMetaData(url, callback) {
     metaget.fetch(url, function (err, meta_response) {
@@ -194,10 +200,9 @@ function postNewsData(data,callback) {
         callback(valid);
     }else {
         const updtaeData = data;
-       // mongo.updateOne('newsData',{"url":data.url},data, function(err,data){
         mongo.updateOne('newsData', {"url":data.url}, updtaeData, function(err, data){
             if(!err){
-                mongo.updateOne('feedData', {"feedData.link":updtaeData.url},{"feedData.$.isPublished" :true}, function(err,data){
+                mongo.updateOne('feedData', updtaeData, function(err,data){
                     if(!err){
                         callback(data);
                     }

@@ -17,20 +17,20 @@ angular.module('CryptoCrunch.Service', [])
         },
         getFeeds: function() {
             var deferred = $q.defer();
-            deferred.resolve($http.get('http://localhost:3000/feed/getFeedList?skip=0&limit=10&sort=-1'));
+            deferred.resolve($http.get('http://localhost:3000/feed/getFeedList?skip=0&limit=30&sort=-1'));
             return deferred.promise;
 
         },
 
         getFeedsByUrl:function (url) {
             var deferred = $q.defer();
-            deferred.resolve($http.get('http://localhost:3000/feed?skip=0&limit=10&sort=-1'));
+            deferred.resolve($http.get('http://localhost:3000/feed?skip=0&limit=30&sort=-1'));
             return deferred.promise;
         },
 
-        getNewsData:function (url) {
+        getNewsData:function (id) {
             var deferred = $q.defer();
-            deferred.resolve($http.get('http://localhost:3000/feed/getFeedDescription?url='+ url));
+            deferred.resolve($http.get('http://localhost:3000/feed/getFeedDescription/' + id))
             return deferred.promise;
         },
         postNewsData:function (data) {

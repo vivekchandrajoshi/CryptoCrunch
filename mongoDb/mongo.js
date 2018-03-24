@@ -55,7 +55,7 @@ function search(collectionName,query,filter,project,skip,limit,sort, callback) {
         mongoSort = sort
     }
     const collection = db.collection(collectionName);
-    collection.find(mongoQuery).filter(mongoFilter).project(mongoProject).sort(mongoSort).skip(mongoSkip).limit(10).toArray(function (err,data) {
+    collection.find(mongoQuery).filter(mongoFilter).project(mongoProject).sort(mongoSort).skip(mongoSkip).limit(mongoLimit).toArray(function (err,data) {
         callback(err,data);
     })
 }

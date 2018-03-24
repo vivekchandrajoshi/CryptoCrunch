@@ -1,11 +1,5 @@
-<div class=" sidebar  row" >
-
-		<div class="col-sm-1 sidebar" >
-			<div class="logo-link sidebar" >
-				<img src="https://static.cryptopanic.com/static/img/cryptopanic-logo-vert-dark.514a405381d8.svg" alt class = "normal-logo">
-			</div>
-		</div>
-		<div class="col-sm-5 nopadding" >
+<div class="row">
+		<div class="col-sm-6 nopadding" >
 			<div class="header " >
 				<!--<div class="dropdown">-->
 					<!--<span>Top News</span>-->
@@ -21,23 +15,36 @@
 							<!--<p>opt2</p>-->
 						<!--</div>-->
 				<!--</div>-->
-				<label class="search-align">search . . .</label> <input type="text" class="search" >
+				<label class="col-sm-12"><input type="text" class="search" placeholder="search" ></label>
 			</div>
 
 			<div class="sidebar" >
+				<!--feedSource List-->
 				<div ng-repeat="(key, value) in feedsUrl" ng-if = "isFeedUrl">
 					<p ><a href="javascript:void(0)" ng-click="getFeed(value)" style="text-decoration: none;color: #fff;">{{value}}</a>
 						<button class="btn btn-primary" ng-click= "editFeedSource(value)">edit</button></p>
-</div>
-				<div ng-repeat="(key, value) in feedNews" ng-if="isFeedDetails">
-					<p class="sidebar"><a href="javascript:void(0)" ng-click="getNewsData(feedNews[key])" style="text-decoration: none;color: #fff;">{{value.title}}</a></p>
-					<a href="{{value.DataUrl}}">{{value.SourceName}}</a> {{value.SourceName}} -- {{key}}
 				</div>
+				<!--feedList-->
+				<div  ng-repeat="(key, value) in feedNews" ng-if="isFeedDetails">
+					<div class="sidebar" ng-class="value.isPublished  ? 'test' : 'error'" >
+					<p><a href="javascript:void(0)" ng-click="getNewsData(feedNews[key])" style="text-decoration: none;color: #fff;">{{value.title}}</a></p>
+					<a href="{{value.DataUrl}}">{{value.SourceName}}</a> -- {{key}}
+					</div>
+				</div>
+				<div ng-if="isCreateNews">
+					<div ng-if="news">
+						<div ng-repeat="(key, data) in news">
+							<br/>
+							{{key}} : {{data}}
 
+						</div>
+					</div>
+				</div>
 			</div>
 
 		</div>
 		<div class="col-sm-6 sidebar" >
+			<!--createFeedSource-->
 			<form ng-if= "isFeedUrl">
 				<div class="form-group row">
 					<label class="control-label col-sm-3" for="feedName">Feed Name:</label>
@@ -71,58 +78,22 @@
 					</div>
 				</div>
 			</form>
-			<form ng-if= "isFeedDetails">
-				<div class="form-group row">
-					<label class="control-label col-sm-2" for="title">Title:</label>
-					<div class="col-sm-10">
-						<textarea type="text" class="form-control" id="title" placeholder="Enter Title" name="title" ng-model="news.title"></textarea>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="control-label col-sm-2" for="description">Description:</label>
-					<div class="col-sm-10">
-						<textarea type="text" class="form-control" id="description" placeholder="Enter Description" name="description" ng-model="news.description" rows="4"></textarea>
-					</div>
-				</div>
-				<div >
-				<div class="form-group row" ng-repeat="(key, value) in news.image track by $index">
-					<label class="control-label col-sm-2" >Images:</label>
-					<div class="col-sm-9" >
-						<input type="text" class="form-control" id="{{$index}}" placeholder="Enter Images Url" name="url" ng-model="value">
-					</div>
-				</div>
-
-					<span class="col-sm-1 fa fa-plus" ng-click="addImage(news.image)"></span>
-				</div>
-				<div class="form-group row">
-					<label class="control-label col-sm-2" for="url">Url:</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="url" placeholder="Enter Url" name="url" ng-model="news.url">
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="control-label col-sm-2" for="newsData">News Data:</label>
-					<div class="col-sm-10">
-						<textarea class="form-control" id="newsData" placeholder="Enter News Data" name="newsData" rows="15"  ng-model="news.newsData">
-
-						</textarea>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="control-label col-sm-2" for="published">Published:</label>
-					<div class="col-sm-10">
-						<input type="checkbox"  id="published"  ng-model="news.isPublished">
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<div class="col-sm-offset-9 col-sm-2">
-						<button type="submit" class="btn btn-default" >Submit</button>
-					</div>
-				</div>
-			</form>
 
 
+			<!--feedInfo-->
+			<div ng-if= "isFeedDetails">
+				<div ng-if="news">
+				<button type="button" class="btn btn-default" ng-click="CreateNews(news._id)" >Create News</button>
+				<div ng-repeat="(key, data) in news">
+					<br/>
+					{{key}} : {{data}}
 
-</div>
+				</div>
+				</div>
+			</div>
+
+			<div ng-if="isCreateNews">
+				test test tes
+			</div>
+		</div>
 </div>
