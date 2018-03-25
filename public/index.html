@@ -22,13 +22,30 @@
 </head>
 
 <body ng-app="CryptoCrunch">
-<div class=" sidebar  row" >
-    <div class="col-sm-1 sidebar" >
-        <div class="logo-link sidebar" >
-            <img src="https://static.cryptopanic.com/static/img/cryptopanic-logo-vert-dark.514a405381d8.svg" alt class = "normal-logo">
-        </div>
+    <div class="app-layout  sidebar" >       
+	<div class="app-left-pane " >
+		<div class="">
+			<a href="/" class="logo-link">
+				<img src="https://static.cryptopanic.com/static/img/cryptopanic-logo-vert-dark.514a405381d8.svg" alt class = "normal-logo">				
+            </a> 
+            <a href="#!signin"> 
+			    <div tabindex="1" class="logo-link app-left-item aa " >SignIn
+                    <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Gnome-stock_person.svg" alt class = "normal-logo">	 -->
+                </div>
+            </a>
+            <a href="#!signup">
+                <div tabindex="1" class="logo-link app-left-item aa" >SignUp
+                    <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Gnome-stock_person.svg" alt class = "normal-logo"> -->
+                </div>
+            </a> 
+            <a href="#!logout">
+			    <div  tabindex="1" class="logo-link app-left-item aa" > Logout
+					<!-- <img src="https://www.brandeps.com/icon-download/S/Sign-out-01.svg" class="logout" alt class = "normal-logo">	 -->
+                </div>
+            </a>
+		</div>
     </div>
-<div ng-view class="col-sm-11"></div>
+<div ng-view class="col-sm-11 nopadding"></div>
 </div>
 </body>
 </html>

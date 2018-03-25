@@ -1,36 +1,24 @@
-<div class="row">
-		<div class="col-sm-6 nopadding" >
-			<div class="header " >
-				<!--<div class="dropdown">-->
-					<!--<span>Top News</span>-->
-						<!--<div class="dropdown-content">-->
-							  <!--<p>opt1</p>-->
-							  <!--<p>opt2</p>-->
-						<!--</div>-->
-				<!--</div>-->
-				<!--<div class="dropdown">-->
-					<!--<span>Show All</span>-->
-						<!--<div class="dropdown-content">-->
-							<!--<p ng-click="()"></p>-->
-							<!--<p>opt2</p>-->
-						<!--</div>-->
-				<!--</div>-->
-				<label class="col-sm-12"><input type="text" class="search" placeholder="search" ></label>
-			</div>
-
-			<div class="sidebar" >
-				<!--feedSource List-->
-				<div ng-repeat="(key, value) in feedsUrl" ng-if = "isFeedUrl">
-					<p ><a href="javascript:void(0)" ng-click="getFeed(value)" style="text-decoration: none;color: #fff;">{{value}}</a>
-						<button class="btn btn-primary" ng-click= "editFeedSource(value)">edit</button></p>
+<div class="app-layout " >	
+	<div class="col-sm-5 nopadding  ">
+		<div class="app-theme-dark text-align-right " autocomplete="off">
+			<input type="text" name="q" autocomplete="off" placeholder="Search..." class="form-control-text ">
+		</div>
+		<div class="app-theme-dark " >
+				<div class="app-theme-dark a" ng-repeat="(key, value) in feedsUrl" ng-if = "isFeedUrl">
+					<a href="#" class=" btn-info" role="button"> *** </a>
+					<a href="javascript:void(0)" class=" a-list" ng-click="getFeed(value)" >{{value}} &#9787 </a>
+					<label class="" for="happy">2</label>  <!-- dinamic the value of happy users -->
+					<button class="btn btn-primary" ng-click= "editFeedSource(value)">edit</button>
 				</div>
+
 				<!--feedList-->
-				<div  ng-repeat="(key, value) in feedNews" ng-if="isFeedDetails">
-					<div class="sidebar" ng-class="value.isPublished  ? 'test' : 'error'" >
-					<p><a href="javascript:void(0)" ng-click="getNewsData(feedNews[key])" style="text-decoration: none;color: #fff;">{{value.title}}</a></p>
-					<a href="{{value.DataUrl}}">{{value.SourceName}}</a> -- {{key}}
+				<div ng-repeat="(key, value) in feedNews" ng-if="isFeedDetails">
+					<div class="app-theme-dark sidebar aa" ng-class="value.isPublished  ? 'test' : 'error'" >
+						<a href="javascript:void(0)" ng-click="getNewsData(feedNews[key])" style="text-decoration: none;color: #fff;">{{value.title}}</a>
+						<a class="text-align-right" href="{{value.DataUrl}}">{{value.SourceName}}</a> 
 					</div>
 				</div>
+
 				<div ng-if="isCreateNews">
 					<div ng-if="news">
 						<div ng-repeat="(key, data) in news">
@@ -41,9 +29,8 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
-		<div class="col-sm-6 sidebar" >
+		<div class="col-sm-6 " >
 			<!--createFeedSource-->
 			<form ng-if= "isFeedUrl">
 				<div class="form-group row">
@@ -64,36 +51,36 @@
 						<input type="text" class="form-control" id="description" placeholder="Enter Description" name="description" ng-model="editableFeed.description">
 					</div>
 				</div>
-
-				<div class="form-group row" ng-if="!isEditFeedSource">
-					<div class="col-sm-offset-9 col-sm-2">
+				<div class="form-group save-update-button row" ng-if="!isEditFeedSource">
+					<!-- <div class="col-sm-9 col-sm-2 "> -->
 						<button type="submit" class="btn btn-primary" ng-click="postNewsData(editableFeed)">Save</button>
-						<button type="button" class="btn btn-warning" ng-click="cancel(editableFeed)">Cancel</button>
-					</div>
+						<button type="button" class="btn btn-warning submit-button" ng-click="cancel(editableFeed)">Cancel</button>
+					<!-- </div> -->
 				</div>
-				<div class="form-group row" ng-if="isEditFeedSource">
-					<div class="col-sm-offset-9 col-sm-2">
+				<div class="form-group save-update-button row" ng-if="isEditFeedSource">
+					<!-- <div class="col-sm-9 col-sm-2 "> -->
 						<button type="submit" class="btn btn-primary" ng-click="putNewsData(editableFeed,editableFeed._id)">Update</button>
-						<button type="button" class="btn btn-warning" ng-click="cancel(editableFeed)">Cancel</button>
-					</div>
+						<button type="button" class="btn btn-warning submit-button" ng-click="cancel(editableFeed)">Cancel</button>
+						<!-- </div> -->
 				</div>
 			</form>
-
-
 			<!--feedInfo-->
 			<div ng-if= "isFeedDetails">
-				<div ng-if="news">
-				<button type="button" class="btn btn-default" ng-click="CreateNews(news._id)" >Create News</button>
-				<div ng-repeat="(key, data) in news">
-					<br/>
-					{{key}} : {{data}}
-
+					<div ng-if="news">
+					<button type="button" class="btn btn-default" ng-click="CreateNews(news._id)" >Create News</button>
+					<div ng-repeat="(key, data) in news">
+						<br/>
+						{{key}} : {{data}}
+	
+					</div>
+					</div>
 				</div>
-				</div>
-			</div>
-
-			<div ng-if="isCreateNews">
-				test test tes
-			</div>
+				<div ng-if="isCreateNews">
+						test test tes
+					</div>
 		</div>
-</div>
+
+			
+
+			
+	</div>
